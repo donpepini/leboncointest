@@ -9,12 +9,12 @@ import MessageList from "../messages/MessageList";
 
 class Dashboard extends Component {
   render() {
-    const { messages, notifications } = this.props;
+    const { messages, notifications, auth } = this.props;
     return (
       <div className="dashboard container">
         <div className="row">
           <div className="col s12 m6">
-            <MessageList messages={messages} />
+            <MessageList messages={messages} auth={auth} />
           </div>
           <div className="col s12 m5 offset-m1">
             <Notifications notifications={notifications} />
@@ -27,6 +27,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
+    auth: state.firebase.auth,
     messages: state.firestore.ordered.messages,
     notifications: state.firestore.ordered.notifications
   };

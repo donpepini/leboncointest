@@ -6,7 +6,8 @@ import { Redirect } from "react-router-dom";
 class CreateMessage extends Component {
   state = {
     title: "",
-    content: ""
+    content: "",
+    visibility: false
   };
   handleChange = e => {
     this.setState({
@@ -16,8 +17,13 @@ class CreateMessage extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.createMessage(this.state);
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
+  handleVisibility = () => {
+    this.setState({
+      visibility: !this.state.visibility
+    })
+  }
   render() {
     const { auth } = this.props;
     if (!auth.uid) {
@@ -41,6 +47,13 @@ class CreateMessage extends Component {
           </div>
           <div className="input-field">
             <button className="btn orange darken-2 z-depth-0">Create</button>
+          </div>
+          <div className="switch">
+            <label>
+              Private
+              <input type="checkbox" value={this.state.visibility} onClick={this.handleVisibility} /><span className="lever"></span>
+              Public
+            </label>
           </div>
         </form>
       </div>

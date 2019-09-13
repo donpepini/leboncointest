@@ -1,20 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //components
 import MessageSchema from "./MessageShema";
 
-const MessageList = ({ messages }) => {
+const MessageList = ({ messages, auth }) => {
+  toast.configure({
+    autoClose: 5000,
+    draggable: false,
+  });
+
+  const showWarning = () => {
+    toast.warn("You need to login to see this message !", {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
+  }
   return (
     <div className="message-list section">
       {messages &&
         messages.map(msg => {
-          return (
-            <Link to={`message/${msg.id}`} key={msg.id}>
-              <MessageSchema message={msg} />
-            </Link>
-          );
+          if (msg.visibility || (!msg.visibility && auth.uid)) {
+            return (
+              <Link to={`message/${msg.id}`} key={msg.id}>
+                <MessageSchema message={msg} />
+              </Link>
+            );
+          } else {
+            return (
+              <Link to={`/`} onClick={showWarning} key={msg.id}>
+                <MessageSchema message={msg} />
+              </Link>
+            );
+          }
         })}
+        <ToastContainer/>
     </div>
   );
 };
