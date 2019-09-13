@@ -25,6 +25,7 @@ class Dashboard extends Component {
   }
 }
 
+//get authentication informations, all messages and notifications
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
@@ -35,8 +36,10 @@ const mapStateToProps = state => {
 
 export default compose(
   connect(mapStateToProps),
+  
+  //collection requests to firestore
   firestoreConnect([
-    { collection: "messages", orderBy: ["createdAt", "desc"] },
+    { collection: "messages", limit: 6, orderBy: ["createdAt", "desc"] },
     { collection: "notifications", limit: 4, orderBy: ["date", "desc"] }
   ])
 )(Dashboard);

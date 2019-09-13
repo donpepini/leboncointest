@@ -1,3 +1,4 @@
+//signin action
 export const signIn = informations => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
@@ -13,6 +14,7 @@ export const signIn = informations => {
   };
 };
 
+//signout action
 export const signOut = () => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
@@ -25,6 +27,7 @@ export const signOut = () => {
   };
 };
 
+//signup action
 export const signUp = (newUser) => {
   return (dispatch, getState, {getFirebase, getFirestore}) => {
     const firebase = getFirebase();

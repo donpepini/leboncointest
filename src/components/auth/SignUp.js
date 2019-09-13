@@ -10,21 +10,27 @@ class SignUp extends Component {
     firstName: "",
     lastName: ""
   };
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+
+  //handle signup information
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     this.props.signUp(this.state);
   };
+
   render() {
     const { auth, authError } = this.props;
+
+    //if logged in, redirect to dashboard
     if (auth.uid) {
       return <Redirect to="/" />;
     }
+    // if not logged in, show signup form 
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
@@ -55,6 +61,7 @@ class SignUp extends Component {
   }
 }
 
+//get authentication status information
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
@@ -62,6 +69,7 @@ const mapStateToProps = state => {
   };
 };
 
+//dispatch user signup information to redux
 const mapDispatchToProps = dispatch => {
   return {
     signUp: newUser => dispatch(signUp(newUser))

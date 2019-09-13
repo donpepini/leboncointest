@@ -8,9 +8,13 @@ import SignedOutLinks from "./SignedOutLinks";
 
 const Navbar = props => {
   const { auth, profile } = props;
-  const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
+  const links = auth.uid ? (
+    <SignedInLinks profile={profile} />
+  ) : (
+    <SignedOutLinks />
+  );
   return (
-    <nav className="nav-wrapper blue darken-4">
+    <nav className="nav-wrapper orange darken-3">
       <div className="container">
         <Link to="/" className="brand-logo left">
           Leboncoin

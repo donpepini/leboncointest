@@ -7,16 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import MessageSchema from "./MessageShema";
 
 const MessageList = ({ messages, auth }) => {
+
+  //warning configuration
   toast.configure({
     autoClose: 5000,
     draggable: false,
   });
 
+  //handle warning
   const showWarning = () => {
-    toast.warn("You need to login to see this message !", {
+    toast.error("You need to login to see this message !", {
       position: toast.POSITION.BOTTOM_LEFT
     });
   }
+
   return (
     <div className="message-list section">
       {messages &&

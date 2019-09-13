@@ -1,3 +1,4 @@
+//create message action
 export const createMessage = (message) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
         //async call to db

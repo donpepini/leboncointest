@@ -6,9 +6,6 @@ admin.initializeApp(functions.config().firebase);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  response.send("Hello from Firebase!");
-});
 
 //add notification to firestore database
 const createNotification = notification => {
@@ -34,7 +31,7 @@ exports.messageCreated = functions.firestore
     return createNotification(notification);
   });
 
-//create notification when user created
+//create notification when user signs up
 exports.userCreated = functions.auth
     .user()
     .onCreate(user => {

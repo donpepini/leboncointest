@@ -9,16 +9,21 @@ class CreateMessage extends Component {
     content: "",
     visibility: false
   };
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+  
+  //handle message creation
   handleSubmit = e => {
     e.preventDefault();
     this.props.createMessage(this.state);
     this.props.history.push("/");
   };
+
+  //switch visibility on click, true or false
   handleVisibility = () => {
     this.setState({
       visibility: !this.state.visibility
@@ -61,6 +66,7 @@ class CreateMessage extends Component {
   }
 }
 
+//get authentication informations
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth
